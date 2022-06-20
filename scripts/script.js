@@ -50,4 +50,7 @@ function viraCarta(elemento){
         }
         cliques++;
     }
+    if (document.querySelectorAll(".front.hidden").length == jogo.length){
+        alert(`Você ganhou em ${cliques} jogadas!`)
+    }
 } 
