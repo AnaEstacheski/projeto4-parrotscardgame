@@ -10,3 +10,16 @@ for (let i = 0; i < pares; i++) {
     jogo.push(tipos[i]);
 }
 jogo.sort(() => {return Math.random() - 0.5});
+
+for (let i = 0; i < jogo.length; i++){
+    const tabuleiro = document.querySelector(".tabuleiro");
+    tabuleiro.innerHTML += `
+    <div class="carta">
+        <div class="carta">
+            <img src="assets/img/icon-parrot.png" alt="Papagaio">
+        </div>
+        <div class="back hidden">
+            <img src=${jogo[i]}>
+        </div>
+    </div>`
+}
