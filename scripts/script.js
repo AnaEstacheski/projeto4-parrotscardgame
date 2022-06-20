@@ -1,4 +1,4 @@
-const cartas = prompt("Quantas cartas você quer no jogo?");
+let cartas = prompt("Quantas cartas você quer no jogo?");
 while (cartas % 2 != 0 || cartas < 4 || cartas > 14) {
     cartas = prompt("Insira um número par entre 4 e 14")
 }
@@ -14,8 +14,8 @@ jogo.sort(() => {return Math.random() - 0.5});
 for (let i = 0; i < jogo.length; i++){
     const tabuleiro = document.querySelector(".tabuleiro");
     tabuleiro.innerHTML += `
-    <div class="carta">
-        <div class="carta">
+    <div class="carta" onclick="viraCarta(this)>
+        <div class="front">
             <img src="assets/img/icon-parrot.png" alt="Papagaio">
         </div>
         <div class="back hidden">
@@ -23,3 +23,31 @@ for (let i = 0; i < jogo.length; i++){
         </div>
     </div>`
 }
+
+let cliques = 0
+let primeira;
+let segunda
+function viraCarta(elemento){
+    if (cliques%2==0){
+        primeira = elemento;
+        primeira.querySelector(".front").classList.add("hidden");
+        primeira.querySelector(".back").classList.remove("hidden");
+        cliques++;
+    } else {
+        segunda = elemento;
+        segunda.querySelector(".front").classList.add("hidden");
+        segunda.querySelector(".back").classList.remove("hidden");
+        if (primeira.innerHTML == segunda.innerHTML){
+            primeira = undefined;
+            segunda = undefined;
+        } else {
+            setTimeout(()=>{
+            primeira.querySelector(".back").classList.add("hidden");
+            primeira.querySelector(".front").classList.remove("hidden");
+            segunda.querySelector(".back").classList.add("hidden");
+            segunda.querySelector(".front").classList.remove("hidden");
+            },1000);
+        }
+        cliques++;
+    }
+} 
