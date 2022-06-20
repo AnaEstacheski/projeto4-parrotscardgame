@@ -1,1 +1,1 @@
-# projeto4-parrotscardgame
+Card Game usigin js only
