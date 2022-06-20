@@ -9,9 +9,9 @@ for (let i = 0; i < pares; i++) {
     jogo.push(tipos[i]);
     jogo.push(tipos[i]);
 }
-jogo.sort(() => {return Math.random() - 0.5});
 
-for (let i = 0; i < jogo.length; i++){
+jogo.sort(() => { return Math.random() - 0.5 });
+for (let i = 0; i < jogo.length; i++) {
     const tabuleiro = document.querySelector(".tabuleiro");
     tabuleiro.innerHTML += `
     <div class="carta" onclick="viraCarta(this)>
@@ -24,33 +24,45 @@ for (let i = 0; i < jogo.length; i++){
     </div>`
 }
 
-let cliques = 0
+let cliques = 0;
 let primeira;
-let segunda
-function viraCarta(elemento){
-    if (cliques%2==0){
-        primeira = elemento;
-        primeira.querySelector(".front").classList.add("hidden");
-        primeira.querySelector(".back").classList.remove("hidden");
-        cliques++;
-    } else {
-        segunda = elemento;
-        segunda.querySelector(".front").classList.add("hidden");
-        segunda.querySelector(".back").classList.remove("hidden");
-        if (primeira.innerHTML == segunda.innerHTML){
-            primeira = undefined;
-            segunda = undefined;
-        } else {
-            setTimeout(()=>{
-            primeira.querySelector(".back").classList.add("hidden");
-            primeira.querySelector(".front").classList.remove("hidden");
-            segunda.querySelector(".back").classList.add("hidden");
-            segunda.querySelector(".front").classList.remove("hidden");
-            },1000);
+let segunda;
+let duasViradas = false;
+function viraCarta(elemento) {
+    if (duasViradas === false) {
+        if (elemento.querySelector(".traseiro").classList.contains("escondido")===false){
+            return;
         }
-        cliques++;
+        if (cliques % 2 == 0) {
+            primeira = elemento;
+            primeira.querySelector(".front").classList.add("hidden");
+            primeira.querySelector(".back").classList.remove("hidden");
+            cliques++;
+        } else {
+            segunda = elemento;
+            segunda.querySelector(".front").classList.add("hidden");
+            segunda.querySelector(".back").classList.remove("hidden");
+            if (primeira.innerHTML == segunda.innerHTML) {
+                primeira = undefined;
+                segunda = undefined;
+            } else {
+                duasViradas = true;
+                setTimeout(() => {
+                    primeira.querySelector(".back").classList.add("hidden");
+                    primeira.querySelector(".front").classList.remove("hidden");
+                    segunda.querySelector(".back").classList.add("hidden");
+                    segunda.querySelector(".front").classList.remove("hidden");
+                    duasViradas = false;
+                }, 1000);
+            }
+            cliques++;
+            console.log(cliques)
+        }
     }
-    if (document.querySelectorAll(".front.hidden").length == jogo.length){
-        alert(`Você ganhou em ${cliques} jogadas!`)
+
+    if (document.querySelectorAll(".front.hidden").length == jogo.length) {
+        setTimeout(() => {
+            alert(`Você ganhou em ${cliques} jogadas!`);
+        },300);
     }
 } 
