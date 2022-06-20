@@ -37,11 +37,13 @@ function viraCarta(elemento) {
             primeira = elemento;
             primeira.querySelector(".front").classList.add("hidden");
             primeira.querySelector(".back").classList.remove("hidden");
+            primeira.classList.add("giro");
             cliques++;
         } else {
             segunda = elemento;
             segunda.querySelector(".front").classList.add("hidden");
             segunda.querySelector(".back").classList.remove("hidden");
+            segunda.classList.add("giro");
             if (primeira.innerHTML == segunda.innerHTML) {
                 primeira = undefined;
                 segunda = undefined;
@@ -52,8 +54,10 @@ function viraCarta(elemento) {
                     primeira.querySelector(".front").classList.remove("hidden");
                     segunda.querySelector(".back").classList.add("hidden");
                     segunda.querySelector(".front").classList.remove("hidden");
+                    primeira.classList.remove("giro");
+                    segunda.classList.remove("giro");
                     duasViradas = false;
-                }, 1000);
+                }, 1300);
             }
             cliques++;
             console.log(cliques)
@@ -63,6 +67,6 @@ function viraCarta(elemento) {
     if (document.querySelectorAll(".front.hidden").length == jogo.length) {
         setTimeout(() => {
             alert(`Você ganhou em ${cliques} jogadas!`);
-        },300);
+        },400);
     }
 } 
