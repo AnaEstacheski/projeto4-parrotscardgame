@@ -25,6 +25,10 @@
 .tabuleiro {
     margin: 47px 110px;
     display: flex;
+    flex-wrap: wrap;
+    gap: 34px;
+    justify-content: center;
+    align-items: center;
 
 }
 .carta {
@@ -36,10 +40,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 34px;
     transition: all 0.3s linear;
     position: relative;
+    cursor: pointer;
 }
 
 .back {
@@ -69,3 +72,16 @@ img {
 .giro {
     transform: rotateY(180deg);
 }
+
+.relogio {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 150px;
+    height: 24px;
+    text-align: center;
+    background-color: #75B79E;
+    color: white;
+    font-size: 20px;
+    border-radius: 3px;
+} 
